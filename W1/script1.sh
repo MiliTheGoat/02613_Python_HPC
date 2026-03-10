@@ -1,13 +1,15 @@
 #!/bin/bash
 # embedded options to bsub - start with #BSUB
 # -- our name ---
-#BSUB -J SingleCorePython 
+#BSUB -J Exercises_Week_1
 # -- choose queue --
 #BSUB -q hpc
 # -- specify that we need 4GB of memory per core/slot --
 # so when asking for 4 cores, we are really asking for 4*4GB=16GB of memory 
 # for this job. 
 #BSUB -R "rusage[mem=4GB]"
+# -- tells the scheduler to run the job on aXeonE5_2660v3 CPU only--
+#BSUB -R "select[model == XeonE5_2660v3]"
 # -- Notify me by email when execution begins --
 #BSUB -B
 # -- Notify me by email when execution ends   --
