@@ -1,3 +1,4 @@
+import sys
 grades = []
 for i in range(len(sys.argv)-1):
     grades.append(int(sys.argv[i+1]))
