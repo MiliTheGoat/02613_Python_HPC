@@ -33,4 +33,4 @@
 source /dtu/projects/02613_2025/conda/conda_init.sh
 conda activate 02613
 
-python -u Python3.1.py
+python -u Python3.2.py
