@@ -33,4 +33,4 @@
 source /dtu/projects/02613_2025/conda/conda_init.sh
 conda activate 02613_2026
 
-python -u 2_haversine.py input.csv
+python -m cProfile -s cumulative 2_haversine.py /dtu/projects/02613_2025/data/locations/locations_100.csv

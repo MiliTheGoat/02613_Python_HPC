@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/dtu/projects/02613_2025/conda/miniconda3/envs/02613_2026/lib/python3.12/cProfile.py", line 195, in <module>
+    main()
+  File "/dtu/projects/02613_2025/conda/miniconda3/envs/02613_2026/lib/python3.12/cProfile.py", line 184, in main
+    runctx(code, globs, None, options.outfile, options.sort)
+  File "/dtu/projects/02613_2025/conda/miniconda3/envs/02613_2026/lib/python3.12/cProfile.py", line 21, in runctx
+    return _pyprofile._Utils(Profile).runctx(statement, globals, locals,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/dtu/projects/02613_2025/conda/miniconda3/envs/02613_2026/lib/python3.12/profile.py", line 64, in runctx
+    prof.runctx(statement, globals, locals)
+  File "/dtu/projects/02613_2025/conda/miniconda3/envs/02613_2026/lib/python3.12/cProfile.py", line 102, in runctx
+    exec(cmd, globals, locals)
+  File "2_haversine.py", line 39, in <module>
+    D = distance_matrix(points, points)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "2_haversine.py", line 11, in distance_matrix
+    cosprod = np.cos(p1[i, 0]) * np.cos(p2[j, 0])
+              ^^^^^^^^^^^^^^^^
+KeyboardInterrupt
