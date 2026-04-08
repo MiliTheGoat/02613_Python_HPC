@@ -4,11 +4,6 @@ def standardize_rows(data, mean, std):
             data[i,j] = (data[i,j] - mean[j]) / std[j]
     return data
 #test
-data = np.array([[1, 2, 3], [4, 5, 6]])
-mean = np.array([0.5, 1, 3])
-std = np.array([1, 2, 3])
-standardized_data = standardize_rows(data, mean, std)
-print(standardized_data)
 
 def outer(v1, v2):
     resutlt = np.zeros((v1.shape[0], v2.shape[0]))
@@ -19,3 +14,11 @@ def outer(v1, v2):
 
 def distmat_1d(x,y):
     return abs(x[:, None] - y[None, :])
+
+f = 100/120
+t_1 = 20/120
+
+t_p = (1-f)*t_1 + (f/10)*t_1
+
+t_p = 1/((1-f)+(f/10))
+print(t_p)
