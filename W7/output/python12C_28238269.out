@@ -1,0 +1,8 @@
+No GPU on this node, CUDA module not loaded
+rows: 8142495
+cols: 7
+unzip_then_read_s: 19.3752
+read_zip_direct_s: 15.7899
+mem_unzip_bytes: 947491609
+mem_direct_bytes: 947491609
+faster_method: read_zip_direct
