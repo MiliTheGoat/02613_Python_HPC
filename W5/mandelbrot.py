@@ -9,10 +9,6 @@ def mandelbrot_escape_time(c):
         if np.abs(z) > 2.0:
             return i
     return 100
-
-
-
-
 def compute_escape_times_chunk(chunk):
     return np.array([mandelbrot_escape_time(c) for c in chunk], dtype=np.int32)
 
@@ -41,6 +37,30 @@ def generate_mandelbrot_set(points, num_processes):
 
     escape_times = np.concatenate(chunk_results)
     return escape_times
+
+
+def generate_mandelbrot_set_chunks(points, num_processes, chunk_size=1000):
+    if num_processes < 1:
+        raise ValueError("num_processes must be at least 1")
+    if chunk_size < 1:
+        raise ValueError("chunk_size must be at least 1")
+
+    total_points = len(points)
+    if total_points == 0:
+        return np.array([], dtype=np.int32)
+
+    # Ensure more chunks than workers whenever it is possible.
+    if total_points > num_processes:
+        max_chunk_for_extra_work = max(1, total_points // (num_processes + 1))
+        chunk_size = min(chunk_size, max_chunk_for_extra_work)
+
+    chunks = [points[i:i + chunk_size] for i in range(0, total_points, chunk_size)]
+
+    with multiprocessing.Pool(processes=num_processes) as pool:
+        results_async = [pool.apply_async(compute_escape_times_chunk, (chunk,)) for chunk in chunks]
+        chunk_results = [result.get() for result in results_async]
+
+    return np.concatenate(chunk_results)
 
     
 def plot_mandelbrot(escape_times):
