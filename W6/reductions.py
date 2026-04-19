@@ -35,25 +35,40 @@ if __name__ == '__main__':
     np.copyto(arr, data)
     del data
 
-    # Run parallel sum
+    # Run parallel reduction
     t = time()
-    pool = mp.Pool(n_processes, initializer=init, initargs=(shared_arr,))
-
-    # First reduction step in parallel: (0+1), (2+3), ... in-place.
     if chunk < 2:
         chunk = 2
     if chunk % 2 != 0:
         chunk += 1
 
-    n_pairs_region = len(arr) - (len(arr) % 2)
-    tasks = [(i, min(i + chunk, n_pairs_region), elemshape)
-             for i in range(0, n_pairs_region, chunk)]
-    pool.map(reduce_step, tasks, chunksize=1)
+    n_images = len(arr)
+    active = n_images
+
+    with mp.Pool(n_processes, initializer=init, initargs=(shared_arr,)) as pool:
+        while active > 1:
+            pair_region = active - (active % 2)
+            tasks = [(i, min(i + chunk, pair_region), elemshape)
+                     for i in range(0, pair_region, chunk)]
+
+            # One reduction level per pool.map call.
+            if tasks:
+                pool.map(reduce_step, tasks, chunksize=1)
+
+            n_pairs = pair_region // 2
+
+            # Compact partial sums to the front for the next level.
+            if n_pairs > 0:
+                arr[:n_pairs] = arr[0:pair_region:2]
+
+            if active % 2 == 1:
+                arr[n_pairs] = arr[active - 1]
+
+            active = n_pairs + (active % 2)
 
     # Write output
     print(time() - t)
-    final_image = arr[0]
-    # final_image /= len(arr) # For mean
+    final_image = arr[0] / n_images
     Image.fromarray(
         (255 * final_image.astype(float)).astype('uint8')
     ).save('result.png')
