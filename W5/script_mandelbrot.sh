@@ -19,13 +19,13 @@
 # if you want to receive e-mail notifications on a non-default address
 ##BSUB -u s225102@dtu.dk
 # -- Output File --
-#BSUB -o batch_outputs/python_%J.out
+#BSUB -o batch_outputs2/python12C_%J.out
 # -- Error File --
-#BSUB -e batch_outputs/python_%J.err
+#BSUB -e batch_outputs2/python12C_%J.err
 # -- estimated wall clock time (execution time): hh:mm -- 
 #BSUB -W 00:30
 # -- Number of cores requested -- 
-#BSUB -n 16
+#BSUB -n 12
 # -- Specify the distribution of the cores: on a single node --
 #BSUB -R "span[hosts=1]"
 # -- end of LSF options -- 
@@ -33,6 +33,4 @@
 source /dtu/projects/02613_2025/conda/conda_init.sh
 conda activate 02613_2026
 
-time python full_serial.py
-time python full_parallel.py
-time python chunked_parallel.py
+time python mandelbrot.py
