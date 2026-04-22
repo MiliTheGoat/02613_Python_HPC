@@ -1,0 +1,6 @@
+No GPU on this node, CUDA module not loaded
+Elapsed time for ziped and reading with Pandas: 15.4674 seconds
+Memory size: 947491609 bytes
+Memory size after reduction: 947491609 bytes
+Time to get to arrow table: 3.221669209189713 seconds 
+Time to convert arrow table to pandas DataFrame: 3.6072124908678234 seconds

@@ -1,0 +1,6 @@
+No GPU on this node, CUDA module not loaded
+Elapsed time: 14.4143 seconds
+Memory size: 947491609 bytes
+Memory size after reduction: 947491609 bytes
+Time to get to arrow table: 3.25608782004565 seconds 
+Time to convert arrow table to pandas DataFrame: 3.5687010549008846 seconds

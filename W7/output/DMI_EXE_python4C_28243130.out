@@ -1,0 +1,14 @@
+No GPU on this node, CUDA module not loaded
+Input CSV: 2023_01.csv
+Output Parquet: 2023_01.parquet
+Rows: 8142495
+Columns: 7
+CSV size: 728466308 bytes (694.72 MiB)
+Parquet size: 106924763 bytes (101.97 MiB)
+Size difference (CSV - Parquet): 621541545 bytes (85.32%)
+CSV->Parquet conversion time: 21.9771 s
+\nAverage timing over repeats:
+CSV read: 14.4132 s
+Parquet read: 1.3801 s
+CSV write: 41.5645 s
+Parquet write: 2.8596 s

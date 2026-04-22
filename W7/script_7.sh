@@ -1,7 +1,7 @@
 #!/bin/bash
 # embedded options to bsub - start with #BSUB
 # -- our name ---
-#BSUB -J Exercises_Week_7.1
+#BSUB -J Week_7_1
 # -- choose queue --
 #BSUB -q hpc
 # -- specify that we need 4GB of memory per core/slot --
@@ -19,13 +19,13 @@
 # if you want to receive e-mail notifications on a non-default address
 ##BSUB -u s225102@dtu.dk
 # -- Output File --
-#BSUB -o output/python12C_%J.out
+#BSUB -o output/DMI_EXE_python4C_%J.out
 # -- Error File --
-#BSUB -e output/python12C_%J.err
+#BSUB -e output/DMI_EXE_python4C_%J.err
 # -- estimated wall clock time (execution time): hh:mm -- 
 #BSUB -W 00:30
 # -- Number of cores requested -- 
-#BSUB -n 12
+#BSUB -n 4
 # -- Specify the distribution of the cores: on a single node --
 #BSUB -R "span[hosts=1]"
 # -- end of LSF options -- 
@@ -33,4 +33,4 @@
 source /dtu/projects/02613_2025/conda/conda_init.sh
 conda activate 02613_2026
 
-python dmi_pandas_io.py
+python parquiet_7.py "2023_01.csv"
