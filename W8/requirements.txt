@@ -1,0 +1,34 @@
+asciitree==0.3.3
+blosc @ file:///home/conda/feedstock_root/build_artifacts/python-blosc_1772532072849/work
+contourpy @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_contourpy_1769155979/work
+cupy @ file:///home/conda/feedstock_root/build_artifacts/cupy-split_1757729620586/work
+cycler @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_cycler_1764466758/work
+Deprecated @ file:///home/conda/feedstock_root/build_artifacts/deprecated_1768934076236/work
+donfig @ file:///home/conda/feedstock_root/build_artifacts/donfig_1734368700593/work
+fasteners @ file:///home/conda/feedstock_root/build_artifacts/fasteners_1734943108928/work
+fastrlock @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_fastrlock_1756729175/work
+fonttools @ file:///home/conda/feedstock_root/build_artifacts/fonttools_1773137064424/work
+google-crc32c @ file:///home/conda/feedstock_root/build_artifacts/google-crc32c_1768549062815/work
+kiwisolver @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_kiwisolver_1773067050/work
+line_profiler @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_line_profiler_1771974558/work
+llvmlite==0.46.0
+matplotlib==3.10.8
+msgpack @ file:///home/conda/feedstock_root/build_artifacts/msgpack-python_1762503974934/work
+munkres==1.1.4
+numba @ file:///home/conda/feedstock_root/build_artifacts/numba_1765466534479/work
+numcodecs @ file:///home/conda/feedstock_root/build_artifacts/numcodecs_1764780155861/work
+numpy @ file:///home/conda/feedstock_root/build_artifacts/numpy_1707225359967/work/dist/numpy-1.26.4-cp312-cp312-linux_x86_64.whl#sha256=031b7d6b2e5e604d9e21fc21be713ebf28ce133ec872dce6de006742d5e49bab
+packaging @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_packaging_1769093650/work
+pandas @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_pandas_1774916580/work
+pillow @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_pillow_1770794002/work
+pyarrow==23.0.1
+pyparsing @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_pyparsing_1769003998/work
+python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_python-dateutil_1751104122/work
+PyYAML @ file:///home/conda/feedstock_root/build_artifacts/pyyaml_1770223234623/work
+setuptools==82.0.1
+six @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_six_1753199211/work
+typing_extensions @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_typing_extensions_1756220668/work
+unicodedata2 @ file:///home/conda/feedstock_root/build_artifacts/unicodedata2_1770908957718/work
+wheel==0.46.3
+wrapt @ file:///home/conda/feedstock_root/build_artifacts/wrapt_1772794662947/work
+zarr @ file:///home/conda/feedstock_root/build_artifacts/zarr_1744263050853/work

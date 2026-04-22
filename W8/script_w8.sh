@@ -33,4 +33,4 @@
 source /dtu/projects/02613_2025/conda/conda_init.sh
 conda activate 02613_2026
 
-python nmemmap.py 10
+python next.py mandelbrot.npy 100 3
