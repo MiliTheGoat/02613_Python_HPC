@@ -33,4 +33,4 @@
 source /dtu/projects/02613_2025/conda/conda_init.sh
 conda activate 02613_2026
 
-python parquiet_7.py "2023_01.csv"
+python participation.py "/dtu/projects/02613_2025/data/dmi/2023_01.csv.zip"

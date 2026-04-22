@@ -1,0 +1,27 @@
+Traceback (most recent call last):
+  File "/dtu/projects/02613_2025/conda/miniconda3/envs/02613_2026/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3641, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 168, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 197, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7668, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7676, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'precip_past10min'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/zhome/88/0/187797/02613_Python_HPC/W7/participation.py", line 18, in <module>
+    main()
+  File "/zhome/88/0/187797/02613_Python_HPC/W7/participation.py", line 15, in main
+    print(total_precip(df1))
+          ^^^^^^^^^^^^^^^^^
+  File "/zhome/88/0/187797/02613_Python_HPC/W7/participation.py", line 9, in total_precip
+    total_precip = pandasdf.iloc[pandasdf["parameterId"] == pandasdf["precip_past10min"]]["value"].sum()
+                                                            ~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/dtu/projects/02613_2025/conda/miniconda3/envs/02613_2026/lib/python3.12/site-packages/pandas/core/frame.py", line 4378, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/dtu/projects/02613_2025/conda/miniconda3/envs/02613_2026/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3648, in get_loc
+    raise KeyError(key) from err
+KeyError: 'precip_past10min'
