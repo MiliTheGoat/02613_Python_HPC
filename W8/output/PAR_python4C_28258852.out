@@ -1,0 +1,2 @@
+No GPU on this node, CUDA module not loaded
+Saved Mandelbrot array with shape (10, 10) to mandelbrot.npy
