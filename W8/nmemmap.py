@@ -1,6 +1,5 @@
 import sys
 import numpy as np
-from numpy.lib.format import open_memmap
 
 def mandelbrot_escape_time(c):
     z = 0j
@@ -21,17 +20,19 @@ def generate_mandelbrot_set(size, output_path="mandelbrot.npy"):
     x_values = np.linspace(xmin, xmax, size)
     y_values = np.linspace(ymin, ymax, size)
 
-    escape_times = open_memmap(
+    # Use raw memmap (not .npy format) so the file contains only int32 data.
+    escape_times = np.memmap(
         output_path,    
         mode="w+",
-        dtype=np.uint16,
+        dtype=np.int32,
         shape=(size, size),
     )
 
-    for row_index, y_value in enumerate(y_values):
-        c = x_values + 1j * y_value
+    # Keep axis order consistent with earlier weeks: first axis follows x-values.
+    for row_index, x_value in enumerate(x_values):
+        c = x_value + 1j * y_values
         z = np.zeros_like(c, dtype=np.complex128)
-        row = np.zeros(size, dtype=np.uint16)
+        row = np.zeros(size, dtype=np.int32)
         active = np.ones(size, dtype=bool)
 
         for iteration in range(max_iter):

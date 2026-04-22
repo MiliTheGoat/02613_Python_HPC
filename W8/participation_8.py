@@ -20,9 +20,9 @@ def main():
     path = sys.argv[1]
     chunk_size = int(sys.argv[2])
     csv_path = "2023_01.csv"
-    unzip_file(path, csv_path)
+    #unzip_file(path, csv_path)
 
-    print(total_precip(csv_path, chunk_size))
+    print(total_precip(path, chunk_size))
 
 if __name__ == "__main__":
     main()
