@@ -4,7 +4,7 @@ import numpy as np
 from PIL import Image
 
 
-def save_downsampled_mandelbrot(array_path, size, step, output_path="figures/mandelbrot.png"):
+def save_downsampled_mandelbrot(array_path, size, step, output_path="mandelbrot.png"):
     if size < 1:
         raise ValueError("size must be at least 1")
     if step < 1:
