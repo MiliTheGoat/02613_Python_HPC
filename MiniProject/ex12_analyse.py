@@ -1,14 +1,13 @@
 """
-Exercise 12 – Part B: Analyse results with pandas, answer all sub-questions.
+Exercise 12 – Part B: Analyse results with pandas.
 
-Q1  Distribution of mean temperatures (histogram)
+Q1  Histograms of all four statistics
 Q2  Average mean temperature
-Q3  Average temperature standard deviation
+Q3  Average temperature std dev
 Q4  Buildings with >= 50% area above 18 C
 Q5  Buildings with >= 50% area below 15 C
 
-Usage: python ex12_analyse.py          (reads results/ex12_all_results.csv)
-       python ex12_analyse.py my.csv   (custom path)
+Usage: python ex12_analyse.py [path/to/results.csv]
 """
 import sys, os
 import pandas as pd
@@ -20,33 +19,30 @@ os.makedirs("figures", exist_ok=True)
 
 df = pd.read_csv(CSV)
 N  = len(df)
-print(f"Loaded {N} buildings from {CSV}\n")
+print(f"Loaded {N} buildings\n")
 print(df[["mean_temp","std_temp","pct_above_18","pct_below_15"]].describe().round(3))
 print()
 
-# ── Q2 & Q3 ──────────────────────────────────────────────────────────────────
 avg_mean = df["mean_temp"].mean()
 avg_std  = df["std_temp"].mean()
-
-# ── Q4 & Q5 ──────────────────────────────────────────────────────────────────
-n_above = (df["pct_above_18"] >= 50).sum()
-n_below = (df["pct_below_15"] >= 50).sum()
+n_above  = (df["pct_above_18"] >= 50).sum()
+n_below  = (df["pct_below_15"] >= 50).sum()
 
 print("=" * 50)
-print(f"Q2  Avg mean temperature       : {avg_mean:.3f} °C")
-print(f"Q3  Avg temperature std dev    : {avg_std:.3f} °C")
-print(f"Q4  Buildings ≥50% above 18°C  : {n_above} / {N}  ({n_above/N*100:.1f}%)")
-print(f"Q5  Buildings ≥50% below 15°C  : {n_below} / {N}  ({n_below/N*100:.1f}%)")
+print(f"Q2  Avg mean temperature      : {avg_mean:.3f} °C")
+print(f"Q3  Avg temperature std dev   : {avg_std:.3f} °C")
+print(f"Q4  Buildings >=50% above 18°C: {n_above}/{N}  ({n_above/N*100:.1f}%)")
+print(f"Q5  Buildings >=50% below 15°C: {n_below}/{N}  ({n_below/N*100:.1f}%)")
 print("=" * 50)
 
-# ── Q1: Histograms ────────────────────────────────────────────────────────────
+# ── Q1: four histograms ───────────────────────────────────────────────────────
 fig, axes = plt.subplots(1, 4, figsize=(16, 4))
 fig.suptitle("Distribution of simulation statistics – all buildings",
              fontsize=12, fontweight="bold")
 
 configs = [
-    ("mean_temp",    "Mean temperature (°C)",      "#e07b39"),
-    ("std_temp",     "Std dev of temperature (°C)","#4c72b0"),
+    ("mean_temp",    "Mean temperature (°C)",       "#e07b39"),
+    ("std_temp",     "Std dev of temperature (°C)", "#4c72b0"),
     ("pct_above_18", "% area above 18 °C",          "#2ca02c"),
     ("pct_below_15", "% area below 15 °C",          "#d62728"),
 ]
@@ -63,12 +59,11 @@ for ax, (col, xlabel, color) in zip(axes, configs):
     ax.grid(axis="y", alpha=0.3)
 
 plt.tight_layout()
-out = "figures/ex12_distributions.png"
-fig.savefig(out, dpi=150, bbox_inches="tight")
+fig.savefig("figures/ex12_distributions.png", dpi=150, bbox_inches="tight")
 plt.close()
-print(f"\nHistogram saved → {out}")
+print("\nSaved figures/ex12_distributions.png")
 
-# ── Extra: viability scatter ──────────────────────────────────────────────────
+# ── Extra scatter: mean vs std coloured by pct_above_18 ──────────────────────
 fig, ax = plt.subplots(figsize=(7, 5))
 sc = ax.scatter(df["mean_temp"], df["std_temp"],
                 c=df["pct_above_18"], cmap="RdYlGn",
@@ -79,7 +74,6 @@ ax.set_ylabel("Temperature std dev (°C)")
 ax.set_title("Mean vs Std Dev (colour = % above 18 °C)")
 ax.grid(alpha=0.3)
 plt.tight_layout()
-out2 = "figures/ex12_mean_vs_std.png"
-fig.savefig(out2, dpi=150, bbox_inches="tight")
+fig.savefig("figures/ex12_mean_vs_std.png", dpi=150, bbox_inches="tight")
 plt.close()
-print(f"Scatter saved    → {out2}")
+print("Saved figures/ex12_mean_vs_std.png")

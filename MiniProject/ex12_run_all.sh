@@ -1,6 +1,6 @@
 #!/bin/bash
 #BSUB -J Ex12_RunAll
-#BSUB -q gpuv100
+#BSUB -q c02613
 #BSUB -gpu "num=1:mode=exclusive_process"
 #BSUB -R "rusage[mem=24GB]"
 #BSUB -n 4
@@ -19,11 +19,13 @@ conda activate 02613_2026
 
 module load cuda/11.8
 export CUDA_PATH=$CUDA_ROOT
-export CUPY_CACHE_DIR=/tmp/cupy_cache_${LSB_JOBID}
+export CUDA_HOME=$CUDA_ROOT
+export PATH=$CUDA_ROOT/bin:$PATH
+export LD_LIBRARY_PATH=$CUDA_ROOT/lib64:$LD_LIBRARY_PATH
+export CUPY_CACHE_DIR=/tmp/cupy_${LSB_JOBID}
 
-echo "GPU  : $(nvidia-smi --query-gpu=name --format=csv,noheader)"
-echo "Host : $(hostname)"
-echo "Date : $(date)"
+echo "CUDA_PATH : $CUDA_PATH"
+echo "GPU       : $(nvidia-smi --query-gpu=name --format=csv,noheader)"
 echo ""
 
 python ex12_run_all_buildings.py

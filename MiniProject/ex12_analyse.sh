@@ -18,10 +18,10 @@ source /dtu/projects/02613_2025/conda/conda_init.sh
 conda activate 02613_2026
 
 if [ ! -f results/ex12_all_results.csv ]; then
-    echo "ERROR: results/ex12_all_results.csv not found - run ex12_run_all.sh first"
+    echo "ERROR: results/ex12_all_results.csv missing - run ex12_run_all.sh first"
     exit 1
 fi
 
-echo "Rows in CSV: $(wc -l < results/ex12_all_results.csv)"
+echo "Rows: $(wc -l < results/ex12_all_results.csv)"
 python ex12_analyse.py
 echo "Done: $(date)"

@@ -3,9 +3,13 @@ Exercise 9: Jacobi solver on GPU with CuPy.
 Usage: python ex9_simulate_cupy.py <N>
 """
 import sys, time
+
+# ── Must come before 'import cupy' ───────────────────────────────────────────
+import cupy_setup   # sets CUDA_PATH so nvrtc can find the right headers
+
+import cupy as cp
 from os.path import join
 import numpy as np
-import cupy as cp
 
 LOAD_DIR = "/dtu/projects/02613_2025/data/modified_swiss_dwellings/"
 MAX_ITER = 20_000
@@ -25,7 +29,7 @@ def jacobi(u, mask, max_iter, atol):
         u_new_int = u_new[mask]
         delta     = cp.abs(u[1:-1,1:-1][mask] - u_new_int).max()
         u[1:-1,1:-1][mask] = u_new_int
-        if delta.item() < atol:   # .item() syncs GPU→CPU: bottleneck (see ex10)
+        if delta.item() < atol:   # .item() = GPU→CPU sync every iter (see ex10)
             break
     return u
 
@@ -44,25 +48,25 @@ N = int(sys.argv[1]) if len(sys.argv) > 1 else 1
 with open(join(LOAD_DIR, "building_ids.txt")) as f:
     ids = f.read().splitlines()[:N]
 
+# Warm-up: trigger kernel compilation once before timing
+_w = cp.zeros(1); _w + _w; cp.cuda.Stream.null.synchronize(); del _w
+
 gpu_name = cp.cuda.runtime.getDeviceProperties(0)["name"].decode()
-print(f"CuPy {cp.__version__} | GPU: {gpu_name}", flush=True)
-print(f"Processing {N} buildings\n", flush=True)
+print(f"CuPy {cp.__version__} | CUDA_PATH={__import__('os').environ.get('CUDA_PATH','?')}", flush=True)
+print(f"GPU: {gpu_name} | N={N}\n", flush=True)
 
 t0 = time.perf_counter()
-
 rows = []
 for bid in ids:
     u_cpu, mask_cpu = load_data(bid)
-    u_gpu    = cp.asarray(u_cpu)
-    mask_gpu = cp.asarray(mask_cpu)
-    u_out    = jacobi(u_gpu, mask_gpu, MAX_ITER, ABS_TOL)
-    rows.append((bid, summary_stats(u_out, mask_gpu)))
+    u_out = jacobi(cp.asarray(u_cpu), cp.asarray(mask_cpu), MAX_ITER, ABS_TOL)
+    rows.append((bid, summary_stats(u_out, cp.asarray(mask_cpu))))
 
 cp.cuda.Stream.null.synchronize()
 elapsed = time.perf_counter() - t0
 
-print(f"Time: {elapsed:.2f}s  |  {elapsed/N:.3f}s per building", flush=True)
-print(f"Estimated for all {N_TOTAL} buildings: {elapsed/N*N_TOTAL/3600:.2f} h\n", flush=True)
+print(f"Time: {elapsed:.2f}s  |  {elapsed/N:.3f}s/building", flush=True)
+print(f"Estimated for all {N_TOTAL}: {elapsed/N*N_TOTAL/3600:.2f} h\n", flush=True)
 
 keys = ["mean_temp", "std_temp", "pct_above_18", "pct_below_15"]
 print("building_id," + ",".join(keys))
