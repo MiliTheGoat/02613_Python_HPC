@@ -1,0 +1,29 @@
+
+GPU: NVIDIA A100 80GB PCIe MIG 2g.20gb
+MAX_ITER=20000  ABS_TOL=0.0001  CHECK_FREQ=100
+
+  [Unoptimised             N= 50]  total= 121.2s  per_bld=2.423s  syncs/bld= 6346  est_all=3.08h
+  [Optimised               N= 50]  total=  72.8s  per_bld=1.456s  syncs/bld=   63  est_all=1.85h
+  [Unoptimised             N=100]  total= 271.9s  per_bld=2.719s  syncs/bld= 7145  est_all=3.45h
+  [Optimised               N=100]  total= 161.9s  per_bld=1.619s  syncs/bld=   71  est_all=2.06h
+
+======================================================================
+  PROFILING SUMMARY – Exercise 10
+======================================================================
+                                        N=50               N=100
+                          time  s/bld  sync/bld  time  s/bld  sync/bld
+----------------------------------------------------------------------
+  Unoptimised             121.2s  2.423s   6346    271.9s  2.719s   7145
+  Optimised                72.8s  1.456s     63    161.9s  1.619s     71
+----------------------------------------------------------------------
+  Speed-up  (N= 50)               1.66×
+  Speed-up  (N=100)               1.68×
+======================================================================
+  Estimated time for all 4571 buildings:
+    Unoptimised : 3.45 h
+    Optimised   : 2.06 h
+======================================================================
+
+  Main issue: unoptimised has 6346x more GPU→CPU syncs per building.
+  Fix: check convergence every 100 iters → 100× fewer syncs.
+

@@ -1,0 +1,19 @@
+No GPU on this node, CUDA module not loaded
+Visualizing 8 floorplans: ['10000', '10009', '10014', '10019', '10029', '10031', '10051', '10053']
+Saved: figures/domain_initial_conditions.png
+Saved: figures/interior_masks.png
+Saved: figures/domain_and_mask_combined.png
+
+── Quick stats per floorplan ──────────────────────────────
+        ID   Grid size   Interior pts   Interior %  Wall pts (5°C)  Wall pts (25°C)
+-------------------------------------------------------------------------------------
+     10000  512x 512         55,302        21.1%          14,824            3,760
+     10009  512x 512         79,592        30.4%          14,769            2,929
+     10014  512x 512         98,242        37.5%          17,024            7,878
+     10019  512x 512         98,301        37.5%          17,106            7,759
+     10029  512x 512         26,233        10.0%           4,753            1,315
+     10031  512x 512         67,886        25.9%          17,929            2,931
+     10051  512x 512         54,456        20.8%          11,916            3,824
+     10053  512x 512         45,376        17.3%          10,877            5,588
+
+All figures saved to ./figures/

@@ -26,49 +26,42 @@ export CUPY_CACHE_DIR=/tmp/cupy_${LSB_JOBID}
 
 echo "CUDA_PATH : $CUDA_PATH"
 echo "GPU       : $(nvidia-smi --query-gpu=name --format=csv,noheader)"
+echo "Host      : $(hostname)"
 echo ""
 
-# ── 1. Profile unoptimised (ex9) ─────────────────────────────────────────────
-echo "=== nsys: unoptimised (N=5) ==="
+# ─────────────────────────────────────────────────────────────────────────────
+# STEP 1: nsys profile of the UNOPTIMISED solution (small N, just for the file)
+# Note: nsys stderr shows version-mismatch warnings — these are harmless.
+# The .nsys-rep file IS generated and can be opened in Nsight Systems GUI
+# to see the thousands of DtoH transfers caused by delta.item() each iteration.
+# ─────────────────────────────────────────────────────────────────────────────
+echo "=== [1/2] nsys profile: generating .nsys-rep files for GUI inspection ==="
+
 nsys profile \
     --trace=cuda,nvtx \
-    --output=profiles/ex10_unoptimised_%j \
+    --output=profiles/ex10_unoptimised_${LSB_JOBID} \
     --force-overwrite=true \
-    python ex9_simulate_cupy.py 5
+    python ex9_simulate_cupy.py 5 2>/dev/null
 
-echo ""
-echo "--- What to look for in cudaapisum ---"
-echo "  cuMemcpyDtoH will have Num Calls in the THOUSANDS."
-echo "  That is delta.item() triggering a GPU->CPU sync every iteration."
-echo "  Compare Num Calls here with the optimised version below."
-echo ""
+echo "Unoptimised profile: profiles/ex10_unoptimised_${LSB_JOBID}.nsys-rep"
 
-# nsys stats text summary (works on DTU if nsys >= 2022.x)
-nsys stats --report cuda_api_sum \
-    profiles/ex10_unoptimised_${LSB_JOBID}.nsys-rep 2>/dev/null || \
-    echo "(nsys stats not available – open .nsys-rep in Nsight Systems GUI)"
-
-echo ""
-
-# ── 2. Profile optimised (ex10) ──────────────────────────────────────────────
-echo "=== nsys: optimised (N=5) ==="
 nsys profile \
     --trace=cuda,nvtx \
-    --output=profiles/ex10_optimised_%j \
+    --output=profiles/ex10_optimised_${LSB_JOBID} \
     --force-overwrite=true \
-    python ex10_simulate_cupy_optimised.py 5
+    python ex10_simulate_cupy_optimised.py 5 2>/dev/null
 
-nsys stats --report cuda_api_sum \
-    profiles/ex10_optimised_${LSB_JOBID}.nsys-rep 2>/dev/null || true
-
+echo "Optimised profile  : profiles/ex10_optimised_${LSB_JOBID}.nsys-rep"
+echo "(Open both in Nsight Systems GUI: unoptimised shows thousands of"
+echo " tiny DtoH memcpy calls; optimised shows 100x fewer.)"
 echo ""
 
-# ── 3. Wall-time comparison ───────────────────────────────────────────────────
-echo "=== Timing N=50: unoptimised ==="
-python ex9_simulate_cupy.py 50 | tee results/ex10_unoptimised_N50.csv
-echo ""
-echo "=== Timing N=50: optimised ==="
-python ex10_simulate_cupy_optimised.py 50 | tee results/ex10_optimised_N50.csv
+# ─────────────────────────────────────────────────────────────────────────────
+# STEP 2: 4-case instrumented profiling with summary table
+# Cases: unoptimised N=50, unoptimised N=100, optimised N=50, optimised N=100
+# ─────────────────────────────────────────────────────────────────────────────
+echo "=== [2/2] Instrumented profiling: 4 cases ==="
+python ex10_profile_instrumented.py | tee results/ex10_summary.txt
 
 echo ""
 echo "Done: $(date)"

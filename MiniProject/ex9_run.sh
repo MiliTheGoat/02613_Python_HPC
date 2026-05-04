@@ -7,8 +7,8 @@
 #BSUB -n 4
 #BSUB -R "span[hosts=1]"
 #BSUB -W 00:30
-#BSUB -o output/ex9_cupy_%J.out
-#BSUB -e output/ex9_cupy_%J.err
+#BSUB -o output/ex9_N200_cupy_%J.out
+#BSUB -e output/ex9_N200_cupy_%J.err
 #BSUB -B
 #BSUB -N
 ##BSUB -u s225102@dtu.dk
@@ -34,6 +34,6 @@ echo "GPU       : $(nvidia-smi --query-gpu=name --format=csv,noheader)"
 echo "Host      : $(hostname)"
 echo ""
 
-python ex9_simulate_cupy.py 50 | tee results/ex9_N50.csv
+python ex9_simulate_cupy.py 200 | tee results/ex9_N200.csv
 
 echo "Done: $(date)"
