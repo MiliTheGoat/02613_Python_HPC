@@ -1,0 +1,18 @@
+Job array index : 4 / 7
+Slice           : buildings [1959, 2612)  =  653 buildings
+GPU             : NVIDIA A100 80GB PCIe
+Host            : n-62-18-13
+
+GPU    : NVIDIA A100 80GB PCIe MIG 2g.20gb
+Slice  : [1959, 2612)  =  653 buildings
+Output : results/ex12_1959_2612.csv
+
+  100/653 (15.3%) | 3.7 min elapsed | ETA 20.5 min
+  200/653 (30.6%) | 7.0 min elapsed | ETA 15.8 min
+  300/653 (45.9%) | 11.2 min elapsed | ETA 13.1 min
+  400/653 (61.3%) | 14.6 min elapsed | ETA 9.2 min
+  500/653 (76.6%) | 18.3 min elapsed | ETA 5.6 min
+  600/653 (91.9%) | 22.3 min elapsed | ETA 2.0 min
+
+Done in 24.1 min  →  results/ex12_1959_2612.csv
+Finished: Mon May  4 15:22:55 CEST 2026

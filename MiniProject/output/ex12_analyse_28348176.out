@@ -1,0 +1,47 @@
+No GPU on this node, CUDA module not loaded
+Slice files in results/:
+-rw-r--r-- 1 s225102 s22 51K May  4 14:06 results/ex12_0_653.csv
+-rw-r--r-- 1 s225102 s22 51K May  4 14:58 results/ex12_1306_1959.csv
+-rw-r--r-- 1 s225102 s22 51K May  4 15:22 results/ex12_1959_2612.csv
+-rw-r--r-- 1 s225102 s22 51K May  4 15:44 results/ex12_2612_3265.csv
+-rw-r--r-- 1 s225102 s22 50K May  4 16:05 results/ex12_3265_3918.csv
+-rw-r--r-- 1 s225102 s22 50K May  4 16:25 results/ex12_3918_4571.csv
+-rw-r--r-- 1 s225102 s22 51K May  4 14:28 results/ex12_653_1306.csv
+
+Found 7 slice files:
+  OK   653 rows   : results/ex12_0_653.csv
+  OK   653 rows   : results/ex12_1306_1959.csv
+  OK   653 rows   : results/ex12_1959_2612.csv
+  OK   653 rows   : results/ex12_2612_3265.csv
+  OK   653 rows   : results/ex12_3265_3918.csv
+  OK   653 rows   : results/ex12_3918_4571.csv
+  OK   653 rows   : results/ex12_653_1306.csv
+
+Merged 4571 buildings → results/ex12_all_results.csv
+All 4571 buildings present.
+
+====================================================
+  DESCRIPTIVE STATISTICS
+====================================================
+       mean_temp  std_temp  pct_above_18  pct_below_15
+count   4571.000  4571.000      4571.000      4571.000
+mean      14.694     6.802        38.929        51.957
+std        2.147     0.444        11.921        12.588
+min        6.817     4.001         4.519        13.594
+25%       13.358     6.572        30.655        43.115
+50%       14.833     6.839        39.045        51.326
+75%       16.184     7.083        47.141        60.226
+max       21.437     8.813        80.887        93.352
+
+====================================================
+  ANSWERS
+====================================================
+  Q2  Avg mean temperature       : 14.694 °C
+  Q3  Avg temperature std dev    : 6.802 °C
+  Q4  Buildings >=50% above 18°C : 804/4571  (17.6%)
+  Q5  Buildings >=50% below 15°C : 2471/4571  (54.1%)
+====================================================
+
+Histogram saved → figures/ex12_distributions.png
+Scatter saved    → figures/ex12_mean_vs_std.png
+Done: Mon May  4 16:26:06 CEST 2026
