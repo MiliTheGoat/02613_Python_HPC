@@ -3,13 +3,13 @@
 # -- our name ---
 #BSUB -J Week_8
 # -- choose queue --
-#BSUB -q hpc
+#BSUB -q c02613
 # -- specify that we need 4GB of memory per core/slot --
 # so when asking for 4 cores, we are really asking for 4*4GB=16GB of memory 
 # for this job. 
 #BSUB -R "rusage[mem=4GB]"
 # -- tells the scheduler to run the job on Intel Xeon Gold 6142 CPU only--
-#BSUB -R "select[model == XeonGold6142]"
+# BSUB -R "select[model == XeonGold6142]"
 # -- Notify me by email when execution begins --
 #BSUB -B
 # -- Notify me by email when execution ends   --
