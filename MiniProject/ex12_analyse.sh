@@ -1,4 +1,9 @@
 #!/bin/bash
+# ── Run AFTER all 7 Ex12 jobs have finished ───────────────────────────────────
+# Pure CPU: merges 7 slice CSVs and runs pandas/matplotlib analysis.
+# Can also be run directly on the login node without submitting:
+#   python ex12_merge_analyse.py
+#
 #BSUB -J Ex12_Analyse
 #BSUB -q hpc
 #BSUB -R "rusage[mem=4GB]"
@@ -10,18 +15,17 @@
 #BSUB -B
 #BSUB -N
 ##BSUB -u s225102@dtu.dk
-# Submit AFTER ex12_run_all.sh has finished.
 
 mkdir -p output figures
 
 source /dtu/projects/02613_2025/conda/conda_init.sh
 conda activate 02613_2026
 
-if [ ! -f results/ex12_all_results.csv ]; then
-    echo "ERROR: results/ex12_all_results.csv missing - run ex12_run_all.sh first"
-    exit 1
-fi
+echo "Slice files in results/:"
+ls -lh results/ex12_[0-9]*_[0-9]*.csv 2>/dev/null || echo "  (none found)"
+echo ""
 
-echo "Rows: $(wc -l < results/ex12_all_results.csv)"
-python ex12_analyse.py
+# Merge + analyse in one script
+python ex12_merge_analyse.py
+
 echo "Done: $(date)"
