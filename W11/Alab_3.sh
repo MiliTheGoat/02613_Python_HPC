@@ -2,7 +2,7 @@
 #BSUB -J "Thajob[2, 29, 71, 73, 127]"
 #BSUB -q hpc
 #BSUB -R "rusage[mem=1GB]"
-#BSUB –w 1234567
+#BSUB -w done(1234567)
 #BSUB -n 1
 #BSUB -R "span[hosts=1]"
 #BSUB -W 00:10
